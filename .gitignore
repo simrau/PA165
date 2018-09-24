@@ -3,6 +3,6 @@
 .project
 test-output
 .classpath
-*.iml
+.iml
 *~
 target
