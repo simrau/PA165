@@ -21,11 +21,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-<<<<<<< HEAD
 			<version>4.12</version>
-=======
-			<version>4.11</version>
->>>>>>> Fixed tests and implemented sellCar
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
