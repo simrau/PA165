@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.tasks;
 
+import cz.fi.muni.pa165.dao.ProductDao;
 import cz.fi.muni.pa165.seminarservices.SeminarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,24 +16,40 @@ import cz.fi.muni.pa165.entity.Product;
 public class Task03 extends AbstractTestNGSpringContextTests {
 
 	//TODO uncomment after you have created the DAO Impl
-//	@Autowired
-//	private SeminarServiceImpl productService;
+	@Autowired
+	private SeminarServiceImpl productService;
+
+	@Autowired
+	private ProductDao productdao;
 	
-//	@Test
-//	public void createFindDeleteTest(){
-//		Product p = new Product();
-//		p.setName("TestProduct1");
-//
-//		productService.create(p);
-//
-//		Product p2 = new Product();
-//		p2.setName("TestProduct2");
-//		productService.create(p2);
-//
-//		Assert.assertEquals(productService.findById(p.getId()).getName(),"TestProduct1");
-//		Assert.assertEquals(productService.findAll().size(), 2);
-//		Assert.assertEquals(productService.findByName("TestProduct1").size(), 1);
-//		productService.remove(p2);
-//		Assert.assertEquals(productService.findAll().size(), 1);
-//	}
+	@Test
+	public void createFindDeleteTest(){
+		Product p = new Product();
+		p.setName("TestProduct1");
+
+		productService.create(p);
+
+		Product p2 = new Product();
+		p2.setName("TestProduct2");
+		productService.create(p2);
+
+		Assert.assertEquals(productService.findById(p.getId()).getName(),"TestProduct1");
+		Assert.assertEquals(productService.findAll().size(), 2);
+		Assert.assertEquals(productService.findByName("TestProduct1").size(), 1);
+		productService.remove(p2);
+		Assert.assertEquals(productService.findAll().size(), 1);
+	}
+
+	@Test
+	public void removeDaoTest(){
+		Product p = new Product();
+		p.setName("TestProduct3");
+		productService.create(p);
+		Product p2 = new Product();
+		p2.setName("TestProduct4");
+		productService.create(p2);
+		Assert.assertEquals(productService.findAll().size(), 3);
+		productdao.remove(p2);
+		Assert.assertEquals(productService.findAll().size(), 2);
+	}
 }
